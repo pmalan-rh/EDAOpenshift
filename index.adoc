@@ -42,8 +42,6 @@ include::{chapters-path}supporttech/quarkus.adoc[leveloffset=+2]
 
 include::{chapters-path}supporttech/serviceregistry.adoc[leveloffset=+2]
 
-
-
 = Developer Tools
 
 == x
