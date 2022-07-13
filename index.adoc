@@ -24,7 +24,7 @@ Pieter Malan
 
 toc::[]
 
-= Infrastructure
+= Infrastructure 
 
 include::{chapters-path}infra/storage/storage.adoc[leveloffset=+2]
 
