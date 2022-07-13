@@ -16,3 +16,16 @@ Cloud Events forms an important part of EDA, and acts as the internal payload de
 
 -- Add samples https://github.com/cloudevents/spec/blob/main/cloudevents/formats/json-format.md
 
+****
+[TIP]
+.Serverless Documentation
+Openshift Documentation 
+https://access.redhat.com/documentation/en-us/red_hat_openshift_data_foundation
+
+****
+
+****
+[INFORMATION]
+.YouTube Video
+Installing ODF on Red Hat Virtualization
+****
