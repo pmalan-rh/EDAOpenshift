@@ -1,0 +1,56 @@
+= Establishing an EDA Platform on Openshift
+Pieter Malan
+:doctype: book
+
+:appendix-caption: Exhibit
+:sectnums:
+:toc: macro
+
+
+:toclevels: 2
+:icons: font
+:xrefstyle: basic
+:relfileprefix: ../
+:outfilesuffix:
+:sectnums:
+:sectnumlevels: 6
+:partnums:
+:chapter-signifier: Chapter
+:part-signifier: Part
+:book: true
+:pdf: true
+
+:chapters-path: chapters/
+
+toc::[]
+
+= Infrastructure
+
+include::{chapters-path}infra/storage/storage.adoc[leveloffset=+2]
+
+include::{chapters-path}infra/serverless/serverless.adoc[leveloffset=+2]
+
+include::{chapters-path}infra/streaming/amq.adoc[leveloffset=+2]
+
+= Supporting Technologies
+
+include::{chapters-path}supporttech/camelk.adoc[leveloffset=+2]
+
+include::{chapters-path}supporttech/debezium.adoc[leveloffset=+2]
+
+include::{chapters-path}supporttech/quarkus.adoc[leveloffset=+2]
+
+include::{chapters-path}supporttech/serviceregistry.adoc[leveloffset=+2]
+
+
+
+= Developer Tools
+
+== x
+
+= Monitoring
+
+== x
+
+[index]
+== Index

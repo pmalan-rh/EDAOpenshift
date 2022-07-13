@@ -1,0 +1,2 @@
+:doctype: book
+= Storage Subsystem
