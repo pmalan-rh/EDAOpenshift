@@ -1,4 +1,6 @@
 :doctype: book
+:icons: font
+:hide-uri-scheme:
 
 = Serverless
 
@@ -6,11 +8,11 @@
 
 Openshift Serverless gives our EDA Platform the infrastructure to create Cloud Native Eventing and Serving capabilities.
 
-On the serving side,it gives us access to automatic scaling and rapid deployment of applications. 
+On the serving side, it gives us access to automatic scaling and rapid deployment of applications. 
 
 Scaling includes traffic-splitting across different versions, flexible routing and scale to zero, which saves resources if deployment is not in use. 
 
-Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filtered based subscription) and Cloud Events.
+Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and Cloud Events.
 
 Cloud Events forms an important part of EDA, and acts as the internal payload definition, with typically HTTP as the communication protocol.
 
