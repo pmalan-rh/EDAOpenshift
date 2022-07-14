@@ -28,19 +28,33 @@ toc::[]
 
 include::{chapters-path}infra/storage/storage.adoc[leveloffset=+2]
 
+<<<
+
 include::{chapters-path}infra/serverless/serverless.adoc[leveloffset=+2]
 
+<<<
+
 include::{chapters-path}infra/streaming/amq.adoc[leveloffset=+2]
+
+<<<
 
 = Integration
 
 include::{chapters-path}integration/camelk.adoc[leveloffset=+2]
 
+<<<
+
 include::{chapters-path}integration/debezium.adoc[leveloffset=+2]
+
+<<<
 
 include::{chapters-path}integration/quarkus.adoc[leveloffset=+2]
 
+<<<
+
 include::{chapters-path}integration/serviceregistry.adoc[leveloffset=+2]
+
+<<<
 
 = Developer Tools
 
@@ -52,7 +66,7 @@ include::{chapters-path}integration/serviceregistry.adoc[leveloffset=+2]
 
 [index]
 == Index
-
+<<<
 == YouTube Play List
 
 ****
