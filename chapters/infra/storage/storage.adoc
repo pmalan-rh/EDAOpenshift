@@ -2,13 +2,13 @@
 :doctype: book
 :icons: font
 :hide-uri-scheme:
-= Storage Subsystem
+= Storage Subsystem (Optional)
 
 == Openshift Capability
 
 Openshift Data Foundation (ODF) is an integrated collection of storage and data services for Openshift.
 
-From an EDA Platform point of view, ODF gives us the capability to store information in a highly available replicated clustered environment on different types of storage types, block, file system and even Simple Storage System (S3), onusing native devices, or virtual devices offered by the underlying compute/cloud provider.
+From an EDA Platform point of view, ODF gives us the capability to store information in a highly available replicated clustered environment on different types of storage types, block, file system and even Simple Storage System (S3), using native devices, or virtual devices offered by the underlying compute/cloud provider.
 
 
 == Installation
@@ -22,14 +22,13 @@ For in depth information on installing ODF see the documentation.
 ****
 [TIP]
 .ODF Documentation
-Openshift Documentation 
+Openshift ODF Documentation 
 https://access.redhat.com/documentation/en-us/red_hat_openshift_data_foundation
 
 ****
 
 ****
-[INFORMATION]
+[NOTE]
 .YouTube Video
-Installing ODF on Red Hat Virtualization
+Installing ODF on Red Hat Virtualization using builtin Ovirt storage class - https://youtu.be/5kqyFDlyv54
 ****
- 

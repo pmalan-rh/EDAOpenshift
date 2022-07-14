@@ -1,5 +1,5 @@
 = Establishing an EDA Platform on Openshift
-Pieter Malan
+Pieter Malan, Robert van Tilburg
 :doctype: book
 
 :appendix-caption: Exhibit
@@ -52,3 +52,12 @@ include::{chapters-path}integration/serviceregistry.adoc[leveloffset=+2]
 
 [index]
 == Index
+
+== YouTube Play List
+
+****
+[INFORMATION]
+.YouTube Play List
+Establish an EDA Platform on Openshift - https://www.youtube.com/watch?v=5kqyFDlyv54&list=PLJhX_m4u3PRGoSjHpHJrUHWGEzVHz5G6P
+****
+ 
