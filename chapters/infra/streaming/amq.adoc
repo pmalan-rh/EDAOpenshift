@@ -1,2 +1,27 @@
 :doctype: book
-= Storage Subsystem
+= AMQ Streams (Kafka)
+
+Apache Kafka is an open-source distributed publish-subscribe messaging system for fault-tolerant real-time data feeds.AMQ Streams is based Apache Kafka.
+
+== AMQ Streams Capabilities
+
+AMQ Streams is a containerized deployment managed by OpenShift supplied AMQ Streams operator. The AMQ Streams Operator are purpose-built with specialist operational knowledge to ease the management of Kafka.
+
+- Optmized for Microservices and other streaming/eventing applications
+- Messaging order guaranteed
+- Horizontal scalability using OpenShift infrastructure
+- Fault tolerant 
+- Quick access to high volumes of data
+
+== Installation
+
+A deployment of Kafka components to an OpenShift cluster using AMQ Streams is highly configurable through the application of custom resources. Custom resources are created as instances of APIs added by Custom resource definitions (CRDs) to extend OpenShift resources.
+
+=== 1. Operator install
+
+The AMQ Streams Operator can be install on a global 
+
+== Role in EDA Platform
+
+Red Hat AMQ Streams is a massively scalable, distributed, and high-performance data streaming platform based on the Apache Kafka project. AMQ Streams provides an event streaming backbone that allows microservices and other application components to exchange data with extremely high throughput and low latency. 
+

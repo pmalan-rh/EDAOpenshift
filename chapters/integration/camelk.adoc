@@ -1,3 +1,5 @@
 :doctype: book
 
-= Camel K
+= Red Hat Integration - Camel K
+
+== Installation
