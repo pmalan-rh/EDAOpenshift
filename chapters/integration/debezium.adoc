@@ -1,3 +1,54 @@
 :doctype: book
 
 = Debezium
+
+Debezium enables you to capture events from a database, when there is any changes on data.
+
+Debezium is built on top of Kafka, and records the history of database changes (Change Data Capture aka. CDC) in Kafka logs. Even if your Debezium configuration is not active, events will be captured as soon as the configuration is restarted.
+
+Debezium is based on log mining, and requires no changes to your data models.
+
+.Debezium Arhitecture
+image::debezium-architecture.png[Debezium Architecture]
+
+== Role in EDA Platform
+
+Most third party applications provides some sort of method to subscribe/publish events, but it is not always true in all cases. In these special cases, you can tap into the power of the database to capture changes on a database level using Debezium, without any code changes to the application, or the underlying database schema.
+
+Debezium can also be used to enable events, in applications where it is difficult to retrofit event publishers. 
+
+****
+[WARNING]
+A bit more work is required, as a typical database event requires some logic to recreate an event. For example, a new order event, consists of the order information and associated order lines. The new order event can be based on a table order, but the Debezium event needs the logic the extract the full event, including querying the order lines from the database.
+****
+
+== Supported Databases
+
+Debezium supports the following databases:
+
+- DB2
+- MongoDB
+- Postgresql
+- Oracle
+- SQLServer
+
+
+== Installation
+
+=== Database Configration
+
+Database configuration is required, and depends on the flavor of the database. Debezium utilizes built in functionality of a specific database.
+
+For example, for Oracle, you have to configure snapshots.
+
+=== Debezium Connector
+
+For the connector configuration, you specify:
+
+- Database connection information
+- Kafka connection information
+- Filters, a set of schemas, tables and columns to include/exclude
+- Masking, optionally hide sensitive data
+- Optionally converters, how the information is pusblished to Kafka, with support of JSON, Protobuf and AVRO.
+- Optionally value converters stored in the Service Registry
+

@@ -31,7 +31,7 @@ toc::[]
 [preface]
 == What is Event-Driven Architecture ?
 
-To understand what is the meaning of Event Driven Architecture, let see what the industry describe it as, by looking at different definitions given by vendors and analysts:
+To understand what is the meaning of Event-Driven Architecture, let see what the industry describe it as, by looking at different definitions given by vendors and analysts:
 
 
 [quote, Google, https://www.gartner.com/en/information-technology/glossary/eda-event-driven-architecture#:~:text=Event%2Ddriven%20architecture%20(EDA)%20is%20a%20design%20paradigm%20in,one%20or%20more%20event%20notifications.]
