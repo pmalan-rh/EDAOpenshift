@@ -8,17 +8,17 @@ image::serverless.svg[]
 
 == Capabilities
 
-OpenShift Serverless gives our EDA Platform the infrastructure to create Cloud Native Eventing and Serving capabilities.
+((OpenShift Serverless)) gives our EDA Platform the infrastructure to create Cloud Native Eventing and Serving capabilities.
 
 On the serving side, it gives us access to automatic scaling and rapid deployment of applications. 
 
 Scaling includes traffic-splitting across different versions, flexible routing and scale to zero, which saves resources if deployment is not in use. 
 
-Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and Cloud Events.
+Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and ((Cloud Events)).
 
-CloudEvents forms an important part of EDA, and acts as the internal payload definition, with typically HTTP as the communication protocol.
+((CloudEvents)) forms an important part of EDA, and acts as the internal payload definition, with typically HTTP as the communication protocol.
 
-A sample CloudEvent:
+A sample ((CloudEvent)):
 
 [source, json]
 ----
@@ -37,6 +37,8 @@ A sample CloudEvent:
 - Accesibility
 - Protability
 
+<<<
+
 == Role in EDA Platform
 
 Serverless handles the internal eventing in a Cloud Native environment. Not only does it allow to scale on demand (or lack of), but it also provides a canonical message model, based on Cloud Events.
@@ -46,16 +48,6 @@ Serverless handles the internal eventing in a Cloud Native environment. Not only
 .Serverless Documentation
 OpenShift Documentation 
     https://access.redhat.com/documentation/en-us/OpenShift_container_platform/4.10/html/serverless/index
-****
-
-****
-[TIP]
-.Serverless Quick Start - OpenShift console
-Install the OpenShift Serverless Operator
-
-
-    https://console-OpenShift-console.apps.*clustername*.*yourdomain*.com/quickstart?quickstart=install-serverless
-
 ****
 
 ****

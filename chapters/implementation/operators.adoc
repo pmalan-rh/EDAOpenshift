@@ -1,0 +1,33 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Operators
+
+Creation of the infrastructure, and Camel K, we are going to use OpenShift operators.
+
+== Openshift Data Foundation (Optional) 
+image::odflogo.png[]
+
+Installation is straight forward using the ((OpenShift Data Foundation Operator)), which includes a wizard to create a storage subsystem. 
+
+During the wizard you are presented with a choice of using an existing storage class, local storage, or connecting to an existing ceph cluster. You also have the option to taint the nodes, to be dedicated storage nodes.
+
+For in depth information on installing ODF see the documentation.
+
+****
+[HINT]
+.Quick Start for OpenShift Data Foundation
+https://console-openshift-console.apps.clustername.domain.com/quickstart?quickstart=odf-install-tour
+****
+
+== Serverless Operator
+
+****
+[TIP]
+.Serverless Quick Start - OpenShift console
+Install the OpenShift Serverless Operator
+
+    https://console-OpenShift-console.apps.*clustername*.*yourdomain*.com/quickstart?quickstart=install-serverless
+
+****

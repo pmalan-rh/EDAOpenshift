@@ -1,4 +1,6 @@
 :doctype: book
+:icons: font
+:hide-uri-scheme:
 
 = Red Hat Integration - Camel K
 
@@ -10,7 +12,7 @@ Camel K runs natively on top of OpenShift and takes advantage of Quarkus, as a r
 
 Camel K gives developers the following advantages:
 
-- Predefined integration templates, called Kamelets, which allows for quick configuration of integrations. Kamelets are pure Camel DSL and can embody all the logic that allows to consume or produce data from public SaaS or enterprise systems and only expose to the final users a clean interface that describes the expected parameters, input and output.
+- Predefined integration templates, called *Kamelets*, which allows for quick configuration of integrations. Kamelets are pure Camel DSL and can embody all the logic that allows to consume or produce data from public SaaS or enterprise systems and only expose to the final users a clean interface that describes the expected parameters, input and output.
 
 - Code in the form of Java, Groovy, Kotlin, JavaScript and XML or Yaml DSL deployment for quick deployment. 
 
@@ -50,6 +52,4 @@ To see the current list of available components, see the Apache Camel Component 
 ****
 
 
-== Installation
-
-== 
+ 

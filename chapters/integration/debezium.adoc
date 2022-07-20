@@ -1,4 +1,6 @@
 :doctype: book
+:icons: font
+:hide-uri-scheme:
 
 = Debezium
 
@@ -11,17 +13,6 @@ Debezium is based on log mining, and requires no changes to your data models.
 .Debezium Arhitecture
 image::debezium-architecture.png[Debezium Architecture]
 
-== Role in EDA Platform
-
-Most third party applications provides some sort of method to subscribe/publish events, but it is not always true in all cases. In these special cases, you can tap into the power of the database to capture changes on a database level using Debezium, without any code changes to the application, or the underlying database schema.
-
-Debezium can also be used to enable events, in applications where it is difficult to retrofit event publishers. 
-
-****
-[WARNING]
-A bit more work is required, as a typical database event requires some logic to recreate an event. For example, a new order event, consists of the order information and associated order lines. The new order event can be based on a table order, but the Debezium event needs the logic the extract the full event, including querying the order lines from the database.
-****
-
 == Supported Databases
 
 Debezium supports the following databases:
@@ -33,7 +24,7 @@ Debezium supports the following databases:
 - SQLServer
 
 
-== Installation
+== Implementation
 
 === Database Configration
 
@@ -52,3 +43,13 @@ For the connector configuration, you specify:
 - Optionally converters, how the information is pusblished to Kafka, with support of JSON, Protobuf and AVRO.
 - Optionally value converters stored in the Service Registry
 
+== Role in EDA Platform
+
+Most third party applications provides some sort of method to subscribe/publish events, but it is not always true in all cases. In these special cases, you can tap into the power of the database to capture changes on a database level using Debezium, without any code changes to the application, or the underlying database schema.
+
+Debezium can also be used to enable events, in applications where it is difficult to retrofit event publishers. 
+
+****
+[WARNING]
+A bit more work is required, as a typical database event requires some logic to recreate an event. For example, a new order event, consists of the order information and associated order lines. The new order event can be based on a table order, but the Debezium event needs the logic the extract the full event, including querying the order lines from the database.
+****

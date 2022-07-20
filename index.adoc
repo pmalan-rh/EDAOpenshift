@@ -34,7 +34,7 @@ toc::[]
 To understand what is the meaning of Event-Driven Architecture, let see what the industry describe it as, by looking at different definitions given by vendors and analysts:
 
 
-[quote, Google, https://www.gartner.com/en/information-technology/glossary/eda-event-driven-architecture#:~:text=Event%2Ddriven%20architecture%20(EDA)%20is%20a%20design%20paradigm%20in,one%20or%20more%20event%20notifications.]
+[quote, Google, https://cloud.google.com/eventarc/docs/event-driven-architectures]
 An event-driven architecture is a software design pattern in which microservices react to changes in state, called events. Events can either carry a state (such as the price of an item or a delivery address) or events can be identifiers (a notification that an order was received or shipped, for example).
 
 
@@ -65,7 +65,10 @@ ____
 
 ****
 
-= Infrastructure 
+
+= Infrastructure Overview
+
+
 
 include::{chapters-path}infra/storage/storage.adoc[leveloffset=+1]
 
@@ -79,9 +82,9 @@ include::{chapters-path}infra/streaming/amq.adoc[leveloffset=+1]
 
 <<<
 
-== Consclusion
+== Conclusion
 
-= Integration
+= Integration Overview
 
 include::{chapters-path}integration/camelk.adoc[leveloffset=+1]
 
@@ -99,11 +102,17 @@ include::{chapters-path}integration/serviceregistry.adoc[leveloffset=+1]
 
 <<<
 
-== Conclusion
+== Consclusion
 
-= Monitoring
+= Sample EDA Platform and Demo implementation
+
+include::{chapters-path}implementation/operators.adoc[leveloffset=+1]
+
+<<<
 
 == x
+
+= Index
 
 [index]
 == Index
