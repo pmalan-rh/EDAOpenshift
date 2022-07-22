@@ -14,7 +14,7 @@ On the serving side, it gives us access to automatic scaling and rapid deploymen
 
 Scaling includes traffic-splitting across different versions, flexible routing and scale to zero, which saves resources if deployment is not in use. 
 
-Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and ((Cloud Events)).
+Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and ((cloud events)), or CloudEvents, refering to the product.
 
 ((CloudEvents)) forms an important part of EDA, and acts as the internal payload definition, with typically HTTP as the communication protocol.
 
@@ -35,18 +35,21 @@ A sample ((CloudEvent)):
 
 - Consistency
 - Accesibility
-- Protability
+- Portability
 
 <<<
 
 == Role in EDA Platform
 
-Serverless handles the internal eventing in a Cloud Native environment. Not only does it allow to scale on demand (or lack of), but it also provides a canonical message model, based on Cloud Events.
+Serverless handles the internal eventing in a Cloud Native environment. 
+
+Not only does it allow to scale on demand (or lack of), but it also provides a canonical message model, based on CloudEvents.
 
 ****
 [TIP]
 .Serverless Documentation
-OpenShift Documentation 
+OpenShift Documentation
+
     https://access.redhat.com/documentation/en-us/OpenShift_container_platform/4.10/html/serverless/index
 ****
 
@@ -54,13 +57,7 @@ OpenShift Documentation
 [TIP]
 .CloudEvents
 cloudevents 
-    https://cloudevents.io/
-****
 
-****
-[INFORMATION]
-.YouTube Video
-Installing Serverless on OpenShift 
-    https://youtu.be/JQd4aqeBtc8
+    https://cloudevents.io/
 ****
 

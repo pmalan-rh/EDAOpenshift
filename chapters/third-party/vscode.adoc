@@ -1,0 +1,29 @@
+= Visual Studio Code
+
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+image::vsc-logo.png[]
+
+Visual Studio Code is a downstream implementation of VSCodium.
+
+https://code.visualstudio.com/
+
+https://vscodium.com/
+
+== Plugins
+
+=== Red Hat Plugins 
+
+Lost of plugins are available: 
+
+.Red Hat supply a range of plugins for Microsoft Visual Studio Code
+image::redhat-plugins-vsc.png[]
+
+=== Other Plugins
+
+==== Karavan - Camel K 
+
+https://marketplace.visualstudio.com/publishers/camel-karavan
+

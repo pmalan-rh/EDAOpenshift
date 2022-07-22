@@ -1,0 +1,24 @@
+= Maven Repository
+
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+image::maven-logo.png[]
+
+== Mirrors
+
+It is advised to use a local maven mirror repository to speed up deployments. 
+
+Camel K, Quarkus, supporting components of AMQ, all use maven artifacts.
+
+The supported versions of Red Hat supplied artifacts all comes from the following repositories.
+
+- https://maven.repository.redhat.com/ga
+- https://maven.repository.redhat.com/earlyaccess/all
+
+Other used repositories include:
+
+- https://packages.confluent.io/maven/
+
+

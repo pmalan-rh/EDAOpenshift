@@ -2,9 +2,11 @@
 :icons: font
 :hide-uri-scheme:
 
-= Operators
+= Installing Operators
 
-Creation of the infrastructure, and Camel K, we are going to use OpenShift operators.
+Creation of the infrastructure, and Camel K, we are going to use OpenShift operators. Most of these operators provides a quick start, which we are going to use for installation.
+
+To access the quick starts available, from the Openshift Consolse, in Administrator perspective, got to Home->Overview, and under "Getting Started resources", you will see the link "View all quick starts". 
 
 == Openshift Data Foundation (Optional) 
 image::odflogo.png[]
@@ -16,18 +18,90 @@ During the wizard you are presented with a choice of using an existing storage c
 For in depth information on installing ODF see the documentation.
 
 ****
-[HINT]
+[TIP]
 .Quick Start for OpenShift Data Foundation
-https://console-openshift-console.apps.clustername.domain.com/quickstart?quickstart=odf-install-tour
+
+
+    https://console-openshift-console.*apps*.*clustername*.domain.com/quickstart?quickstart=odf-install-tour
 ****
 
+<<<
+
 == Serverless Operator
+
+Configuring the OpenShift Serverless environment requires the installation of the ((OpenShift Serverless Operator)), and the configuration of the KNative and KServing deployments. For our needs we are going to use defaults, but keep in mind that customized configuration can be done.
+
+Use the "Install the Openshift Serverless Operator" Quick start wizard to complete the installation.
+
 
 ****
 [TIP]
 .Serverless Quick Start - OpenShift console
-Install the OpenShift Serverless Operator
+Install the OpenShift Serverless Operator using the guided wizard offered by a Quick Start
 
     https://console-OpenShift-console.apps.*clustername*.*yourdomain*.com/quickstart?quickstart=install-serverless
 
 ****
+
+<<<
+
+== Camel K
+image::camelklogo.png[]
+
+To install the ((Red Hat Camel K Operator)):
+
+- From the *Administrator* perspective, got to the OperatorHub from the Operators section of the navigation pane.
+- In the *All Items* filter, type in *Camel K*
+- Click the Red Hat Integration - Camel K tile, to open the Operator details
+- At the top of Red Hat Integration - Camel K Operator panel, click Install
+- Leave all fields the defaults and click Install
+- After a few minutes, you will get a confirmation that Operator is ready for use. 
+
+****
+[WARNING]
+If you running into an issue deploying Camel K Operator, where the deployment fails with a ImagePullBackOff error. You can view the progress on the issue at the following link:
+https://issues.redhat.com/browse/ENTESB-19495?focusedCommentId=20637854&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-20637854
+
+As a workaround, we are going to patch the Camel K Cluster Service Version, to pull the operator image based on version, not hash:
+
+- Operators->Installed Operators->Red Hat Integration - Camel K->YAML Tab:
+
+- On Line: 423 - replace registry.redhat.io/integration/camel-k-rhel8-operator:1.6.8
+
+- Save the change
+
+- Delete the camel-k-operator deployment, under Deployments, project openshift-operators to force a redploy, with corrected iamge.
+****
+
+== Red Hat Integration - Service Registry
+image::odflogo.png[]
+
+To install the ((Red Hat Service Registry Operator)):
+
+- From the *Administrator* perspective, got to the OperatorHub from the Operators section of the navigation pane.
+- In the *All Items* filter, type in *registry operator*
+- Click the Red Hat Integration - Service Registry tile, to open the Operator details
+- At the top of Red Hat Integration - Service Registry Operator panel, click Install
+- Leave all fields the defaults and click Install
+- After a few minutes, you will get a confirmation that Operator is ready for use. 
+
+== Red Hat Openshift distributed tracing platform
+image::distributed-logo.png[]
+
+To install the ((Red Hat distributed tracing platform)):
+
+- From the *Administrator* perspective, got to the OperatorHub from the Operators section of the navigation pane.
+- In the *All Items* filter, type in *distributed tracing*
+- Click the Red Hat OpenShift distributed tracing platform tile, to open the Operator details
+- At the top of Red Hat OpenShift distributed tracing platform panel, click Install
+- Leave all fields the defaults and click Install
+- After a few minutes, you will get a confirmation that Operator is ready for use. 
+
+<<<
+
+== Summary
+
+After the process of installing required operators, you should be able to confirm the Installed Operators, by looking at the project openshift-operators, and Installed Operators.
+
+.Installed Operators Summary
+image::installed-operators.png[]

@@ -66,7 +66,7 @@ ____
 ****
 
 
-= Infrastructure Overview
+= Openshift Container Overview
 
 
 
@@ -78,15 +78,19 @@ include::{chapters-path}infra/serverless/serverless.adoc[leveloffset=+1]
 
 <<<
 
-include::{chapters-path}infra/streaming/amq.adoc[leveloffset=+1]
+include::{chapters-path}infra/distributedtracing/distributedtracing.adoc[leveloffset=+1]
 
 <<<
 
 == Conclusion
 
-= Integration Overview
+= Application Foundation Overview
 
-include::{chapters-path}integration/camelk.adoc[leveloffset=+1]
+include::{chapters-path}infra/streaming/amq.adoc[leveloffset=+1]
+
+<<<
+
+include::{chapters-path}integration/camelk.adoc[leveloffset=+1,chapter-number=1]
 
 <<<
 
@@ -104,9 +108,28 @@ include::{chapters-path}integration/serviceregistry.adoc[leveloffset=+1]
 
 == Consclusion
 
+= Third Party Requirements
+
+<<<
+
+include::{chapters-path}third-party/mavenrepo.adoc[leveloffset=+1]
+
+<<<
+
+include::{chapters-path}third-party/vscode.adoc[leveloffset=+1]
+
+<<<
+
+== Conclusion
+
+
 = Sample EDA Platform and Demo implementation
 
 include::{chapters-path}implementation/operators.adoc[leveloffset=+1]
+
+<<<
+
+include::{chapters-path}implementation/demoerp.adoc[leveloffset=+1]
 
 <<<
 
@@ -116,12 +139,6 @@ include::{chapters-path}implementation/operators.adoc[leveloffset=+1]
 
 [index]
 == Index
-<<<
-== YouTube Play List
 
-****
-[INFORMATION]
-.YouTube Play List
-Establish an EDA Platform on OpenShift - https://www.youtube.com/watch?v=5kqyFDlyv54&list=PLJhX_m4u3PRGoSjHpHJrUHWGEzVHz5G6P
-****
+
  

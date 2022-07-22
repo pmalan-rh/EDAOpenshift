@@ -1,0 +1,10 @@
+= Distributed Tracing Platform
+
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+image::serverless.svg[]
+
+== Capabilities
+

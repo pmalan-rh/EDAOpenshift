@@ -1,0 +1,93 @@
+= Demo ERP - ODOO
+
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+:source-highlighter: coderay
+
+image::odoo-logo.png[]
+
+Our third party application is going to be ODOO.
+
+The reason for choosing Odoo is the fact that it is free to use, and does not, for our purposes, expose any API's, hence we have to use the database to integrate. 
+
+The database schema is straight forward and easy to understand, which gives us another reason to Odoo.
+
+[quote, ODOO, https://odoo.com]
+____
+Odoo is a suite of open source business apps that cover all your company needs: CRM, eCommerce, accounting, inventory, point of sale, project management, etc.
+
+Odoo's unique value proposition is to be at the same time very easy to use and fully integrated.
+____
+
+
+
+[NOTE]
+Keep in mind, however, that even if ODOO is open source, that it can be replaced with Oracle eBusiness Suite, SAP, Workday and a multitude of other ERP, CRM, Supply Chain and other off-the-shelf applications.
+
+== Installing Odoo
+
+First we have to create a namespace for Odoo.
+
+- From the *Administrator* perspective, go to *Projects* from the *Home* section of the navigation pane.
+- On the list of projects, click on *Create Project*
+- Call the namespace odoo and give a description, and click on Create namespace
+
+image::odoo-namespace.png[]
+
+
+For the installation we are going to use a predefined template to build the application.
+
+
+[note]
+___
+The template was translated and modified from the original template which developed by Franklin Gomez.
+
+There is also an Odoo Operator, but it requires a lot of pre-configuration.
+
+___
+
+=== Creating Template and Instantiating Template
+
+To install the template:
+
+- From the *Administrator* perspective, got to *Projects* from the *Home* section of the navigation pane.
+- In the *Projects* panel, click on the project *odoo*
+- On the top, next to your user name, and the *?*, there is a + sign. Click on the + sign:
+
+image::odoo-add-template.png[]
+
+- Paste the contents of the Odoo Temlpate in the Import YAML, and click create.
+
+.Odoo Template
+https://raw.githubusercontent.com/pmalan-rh/EDAOpenShift-code/main/odoo/odoo-template.yaml
+
+- Switch perspective to *Developer*
+- Click on *+Add*
+- Under *Developer Catalog*, click on *All Services*
+- In the search box, type in *odoo*
+- Select *Odoo*
+- In the popup window, click on *Instantiate Template*
+- In the template, specify *odoo* for *Project Name*, leaving the others as defaults
+- Click *Create*
+
+After a few minutes, you will see the deployments in ready state as indicated by the blue rings around it.
+
+.Odoo Deployment Completed
+
+image::odoo-complete.png[]
+
+=== Configuring odoo application
+
+Next step is to configuring the application, and enable the sales module.
+
+- Switch perspective to *Developer*, making sure that the selected Project is still odoo.
+- If the Topology is not shown, click on *Topology*
+- Click on image:link.png[link] icon to open the application in browser.
+- You will be greeted with a configuration wizard as follow:
+
+image:odoo-config.png[]
+
+- Fill in the values as supplied in above screenshot, make sure that the *Email* is admin@example.com,  *Password* is odoo, and that checkbox Demo data is selected
+- Click on *Create Database*
+- It will take a bit to build the database, so be patient after clicking the Create Database button.
