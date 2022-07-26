@@ -43,11 +43,13 @@ For the installation we are going to use a predefined template to build the appl
 ___
 The template was translated and modified from the original template which developed by Franklin Gomez.
 
+http://gitlab.paas.agesic.red.uy/franklin.gomez/odoo-ocp - Div. TE-Tecnologías, Agesic
+
 There is also an Odoo Operator, but it requires a lot of pre-configuration.
 
 ___
 
-=== Creating Template and Instantiating Template
+== Creating Template and Instantiating Template
 
 To install the template:
 
@@ -77,7 +79,7 @@ After a few minutes, you will see the deployments in ready state as indicated by
 
 image::odoo-complete.png[]
 
-=== Configuring odoo application
+== Configuring odoo application
 
 Next step is to configuring the application, and enable the sales module.
 
@@ -90,4 +92,31 @@ image:odoo-config.png[]
 
 - Fill in the values as supplied in above screenshot, make sure that the *Email* is admin@example.com,  *Password* is odoo, and that checkbox Demo data is selected
 - Click on *Create Database*
-- It will take a bit to build the database, so be patient after clicking the Create Database button.
+- It will take a bit to build the database, so be patient after clicking the Create Database button. The only indication that something is happing is the loading indicator in the browser.
+
+== Customizing Odoo
+
+Last step is to install required functionality within Odoo, in our case, we are going to use the Sales module.
+
+- Switch perspective to *Developer*, making sure that the selected Project is still odoo.
+- If the Topology is not shown, click on *Topology*
+- Click on image:link.png[link] icon to open the application in browser.
+- This time round, you will be greeted with a login page:
+
+image:odoo-login.png[]
+
+- Login with admin@example.com and the password odoo.
+- Search for Sales, and click on *Install*
+
+image:odoo-sales.png[]
+
+[TIP]
+The installation of the Sales module will take a while, if you get an error message in the browser, don't worry, the installation is still happening in the background, just refresh the browser page.
+
+You would be able to use the Sales module after installation, using the four square icon next to the Apps menu.
+
+image:odoo-sales-ready.png[]
+
+
+
+

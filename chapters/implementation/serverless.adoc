@@ -1,0 +1,98 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Serverless Configuration
+
+== Project
+
+First we need to create a project to work in. Since the Serverless Operator is installed on a cluster level, we don't need any special configuration in a project to utilize Serverless Components.
+
+- From the *Administrator* perspective, got to the Projects from the Home section of the navigation pane.
+- *Create project*, called *eda-order-entry*
+
+image:eda-order-entry-project.png[]
+
+<<<
+
+== Enable Knative Bindings
+
+Next we have to make the project aware that it has the capability to bind to Knative services:
+
+- From the *Administrator* perspective, got to the *Namespaces* from the *Administration* section of the navigation pane.
+- Next to our eda-order-entry namespace, click the 3 dots, and click *Edit Labels*
+image:namespace-label.png[]
+- Add the label:
+
+    bindings.knative.dev/include=true
+
+image:namespace-label-add.png[]
+
+- Click *Save*
+
+== Creating a Channel and Broker
+
+In order to add Knative components, you have the option to use the +Add and also to right click on the topology view.
+
+- Make sure you are in the correct Project, and the *Developer Perspective*
+- Select *Topology* in the navigation pane
+- Right click on the blank canvase, stating *No resources found*
+
+image:add-to-project.png[]
+
+- Select *Add to Project*
+- Add Channel, keep the defaults and click *Create*
+- Again, right click on the canvas, and add a Broker
+- Keep the defaults and click *Create*
+
+== Source
+
+To define a source, we follow very similar steps as we did for adding a channel and broker.
+
+- Right click on the canvas, *Add to Project*, and *Event Source*
+- Click on the *PingSource* Panel
+- In the PingSource pop-up window click *Create Event Source*
+- In the *Create Event Source* form, keep all the defaults, add your *Data*, {"message": "Hello world!"}, and specify the *Schedule* as */1 * * * *
+- Make sure the *Input Target*'s *Resource* is pointing to the channel.
+- Click on *Create*
+
+image:kn-source.png[]
+
+[HINT]
+Feel free to move the components around.
+
+
+== Target
+
+For a target we are going to utilize a container to log the CloudEvent, and for demonstration purposes, we are alo going to make the container serverless.
+
+- Again, from the *Developer* perspective, *Topology*, right click on the canvas
+- *Add to Project*, and select *Container Iamge*
+- In the field *Image name from external registry* specify
+    gcr.io/knative-releases/knative.dev/eventing/cmd/event_display
+- Under *Resources*, select *Serverless Deployment*
+- Click *Create*
+
+It will take a while to deploy, and the following image will appear when deployment is completed:
+
+image:serverless-deployment.png[]
+
+== Connecting Knative Events
+
+The last step is to hook up the event sink, in our case our serverless container, to the channel.
+
+- Hover your mouse icon over the channel. As soon as the blue arrow appears, grab the arrow and point it to the outer box (containing the *KSVC event* label)
+
+image:kn-add-event.png[]
+
+- The following pop-up will appear:
+
+image:kn-add-event-wizard.png[]
+
+- Leave the defaults and click on *Add*
+
+
+
+
+
+
