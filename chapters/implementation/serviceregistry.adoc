@@ -1,0 +1,65 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Service Registry 
+
+== Installing Service Registry
+
+The service registry requires persistence storage, in the form of an RDBMS or KafkaSQL.
+
+Since we have our kafka instance, we are going to use that.
+
+=== Getting Kafka Bootstrap Server Endpoint
+
+- From *Administrator* perspective, click on *Projects* under *Home*
+- Select *amq-streaams* from the projects 
+- On the *Inventory* panel, click on *Services*
+- Click on *my-cluster-kafka-bootstrap* service
+- On the right hand-side, under *Service Routing*, take note of the *Hostname*
+- Also note the ports, under *Service port mapping*, the one we are interested in is the tcp-clients 9092.
+
+.Bootstrap Server Endpoint for my-cluster-kafka-bootstrap
+my-cluster-kafka-bootstrap.amq-streams.svc:9092
+
+[note]
+****
+The service hostname is determined by service and project (namespace), appended with svc.cluster.local.
+
+The 'cluser.local' is added automatically,as it is the default local domain name, so typically it is dropped from service endpoints, if used internal to OpenShift. 
+****
+
+Next up, we have to create a namespace for Service Registry.
+
+- From the *Administrator* perspective, go to *Projects* from the *Home* section of the navigation pane.
+- On the list of projects, click on *Create Project*
+- Call the namespace *service-registry* and give a description, and click on *Create* namespace
+- Go to the *Installed Operators*, under *Operators* heading
+- Select *Red Hat Integration - Service Registry Operator* from the operator list
+- On the *Apicurio Registry* pane, click *Create Instance*
+- Select the *YAML view* option in the *Configure via:* choice
+- Change the *name:* to service-registry
+- Replace <service name> with *my-cluster-kafka-bootstrap*
+- Replace <namespace> with *amq-streams*
+- Clicnk on *Create*
+
+.Service Registry YAML
+image::service-registry-config.png[]
+
+== Testing to Registry
+
+By default, there would be a route created to expose the registry to the outside world.
+
+In order to get the external facing registry UI:
+
+- From *Administrator* perspective, go to *Routes*, under *Networking* heading
+- Click on the link displayed, next to the service-registry-ingress.
+
+.Service Registry UI
+image::service-registry.png[]
+
+[warning]
+****
+It is always possible to remove the service, or add additional security on top of the Registry's web console.
+****
+

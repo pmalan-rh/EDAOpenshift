@@ -1,0 +1,71 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= AMQ Streams Configuration
+:source-highlighter: rouge
+
+== Project
+
+Let us create a project to work in. Since the AMQ Streams Operator is installed on a cluster level, we don't need any special configuration in a project to utilize ANQ Streams Components.
+
+- From the *Administrator* perspective, got to the *Projects* from the Home section of the navigation pane.
+- *Create project*, called *amq-streams*
+
+== AMQ Streams Instance
+
+Now to instantiate a Kafka cluster, using AMQ Streams Operator:
+
+- Navigate to *Installed Operators* under *Operators*
+- Confirm that the selected project is *amq-streams*
+- Click on the *Red Hat Integration - AMQ Streams Operator*
+- Click on the *Kafka* panel, *Create instance*
+- Switch to *YAML* view and paste the following YAML:
+
+.Raw yaml
+https://raw.githubusercontent.com/pmalan-rh/EDAOpenShift-code/main/amq-streams/amq-streams.yaml
+
+[code,yaml]
+---- 
+kind: Kafka
+apiVersion: kafka.strimzi.io/v1beta2
+metadata:
+  name: my-cluster
+  namespace: amq-streams
+spec:
+  kafka:
+    version: 3.1.0
+    replicas: 3
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      default.replication.factor: 3
+      min.insync.replicas: 2
+      inter.broker.protocol.version: '3.1'
+    storage:
+      deleteClaim: true
+      size: 5Gi
+      type: persistent-claim
+  zookeeper:
+    replicas: 3
+    storage:
+      deleteClaim: true
+      size: 5Gi
+      type: persistent-claim
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+---- 
+
+- Click on *Create*
+

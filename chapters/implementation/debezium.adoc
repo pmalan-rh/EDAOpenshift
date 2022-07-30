@@ -1,0 +1,188 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Demo Debezium - Change Data Capture
+:source-highlighter: rouge
+
+Debezium configuration require two distinct areas. 
+
+First we have to prepare the database to publish, or capture logs, depending on the RDBMS in question.
+
+Secondly, we have to configure the Kafka Connector to enable the events to be published.
+
+== Postgress Configuration
+
+We have to configure the database engine configuration, and also apply some changes on a schema level, through sql interaction.
+
+For the database configuration:
+
+- From *Admin* perspective, select *Projects*, from the *Home*
+- Click on the *odoo* project
+- In the navigation panel, select *Pods*, under *Workloads*
+- On the list of pods, click on the pod named *db-..*
+- With pod information open, click on the *Terminal* tab, to open a terminal session
+
+Now that we have access to the database host pod, we can start doing the configuration.
+
+.Postgresql Terminal
+image::postgresql-terminal.png[]
+
+On the terminal 
+- Click on *Expand* to open a full window  
+- cd /var/lib/pgsql/data/userdata
+- vi postgress.conf
+
+Apply the changes as follow at the the bottom of the file, *#WAL / Replication* paragraph should be added:
+
+.Changes to postgresql.conf
+[code,,highlith=5-7]
+----
+#------------------------------------------------------------------------------
+# CUSTOMIZED OPTIONS
+#------------------------------------------------------------------------------
+
+# Add settings for extensions here
+
+# WAL / replication
+wal_level = logical
+max_wal_senders = 3
+
+# Custom OpenShift configuration:
+include '/var/lib/pgsql/openshift-custom-postgresql.conf'
+----
+
+- *Collapse* to get back to pod information panel
+- Restart pod, using *Actions*, *Delete Pod*, to force the Postgresql to restart with new configuration.
+
+After the pod has restarted, we have to enable the odoo database with replication.
+
+- Again, following steps above, to get the terminal of the *db-..* pod.
+- In the terminal, eexecute the following:
+
+[code,sql]
+----
+psql -U postgres        
+psql (10.21)
+Type "help" for help.
+
+postgres=# create role debezium replication login;
+CREATE ROLE
+postgres=# grant debezium to odoo;
+GRANT ROLE
+postgres=# ALTER USER odoo WITH SUPERUSER;
+ALTER ROLE
+postgres=#/q
+----
+
+== Configuring Kafka Connect
+
+Kafka Connect is the service to which a Kafka Connector is deployed to. The coonector is build by OpenShift with all the relevant libraries required, as specified in the KafkaConnect resource.
+
+In order to use Debezium, we have to include the relevant libraries into the Kafka Connect. We are also going to deploy the service registry libraries.
+
+To create a Kafka Connect configuration:
+
+We have to create a target ImageStream for the output of the build of our connector.
+
+- Click on the *+* at the top next to your username.
+- Paste the following YAML, to create ImageStream
+
+.YAML for ImageStream
+https://raw.githubusercontent.com/pmalan-rh/EDAOpenShift-code/main/debezium/debezium-streams-connect.yaml
+
+[code]
+----
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: debezium-streams-connect
+  namespace: amq-streams
+----
+
+- From the *Administrator* perspective, navigate to *Projects*, under *Home*
+- Select the *amq-streams* from the project list
+- Click on *Installed Operators*, and click on *Red Hat Integration - AQM Streams*
+- Click on the *Create Instance* on the *Kafka Connect* panel
+- Click on the *YAML view* on the *Configure via* option
+- Change the YAML to reflect the following:
+
+.YAML for Kafka Connect
+https://raw.githubusercontent.com/pmalan-rh/EDAOpenShift-code/main/debezium/my-connect-cluster.yaml
+
+.Kafka Connect YAML
+[code]
+----
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnect
+metadata:
+  name: my-connect-cluster
+  namespace: amq-streams
+  annotations:
+    strimzi.io/use-connector-resources: "true"
+spec:
+  config:
+    group.id: connect-cluster
+    offset.storage.topic: connect-cluster-offsets
+    config.storage.topic: connect-cluster-configs
+    status.storage.topic: connect-cluster-status
+    config.storage.replication.factor: -1
+    offset.storage.replication.factor: -1
+    status.storage.replication.factor: -1
+  tls:
+    trustedCertificates:
+      - secretName: my-cluster-cluster-ca-cert
+        certificate: ca.crt
+  version: 3.1.0
+  build:
+    output:
+      type: imagestream
+      image: debezium-streams-connect:lastest
+    plugins:
+      - name: debezium-connector-postgresql
+        artifacts:
+          - type: zip
+            url: https://maven.repository.redhat.com/ga/io/debezium/debezium-connector-postgres/1.9.5.Final-redhat-00001/debezium-connector-postgres-1.9.5.Final-redhat-00001-plugin.zip
+          - type: zip
+            url: https://maven.repository.redhat.com/ga/io/apicurio/apicurio-registry-distro-connect-converter/2.2.2.managedsvc-redhat-00001/apicurio-registry-distro-connect-converter-2.2.2.managedsvc-redhat-00001.zip
+        
+  replicas: 1
+  bootstrapServers: 'my-cluster-kafka-bootstrap:9093'
+----
+
+=== Verify Build
+
+To verify that the build was successful, from *Administrator* perspective, go to *Builds* under heading *Builds*.
+
+You should see a *complete* build if configuration applied correctly.
+
+.Completed Build
+image::amq-connect-build.png[]
+
+== Configuring Kafka Connector
+
+The Kafka Connector is responsible to define the database connection and relevant schema elements we are interested in capturing change events from. This configuration is fed into the Kafka Connect to start capturing of events.
+
+[code]
+----
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  labels:
+    strimzi.io/cluster: my-connect-cluster
+  name: sales-connector-postgresql 
+spec:
+  class: io.debezium.connector.postgresql.PostgresConnector 
+  tasksMax: 1 
+  config:  
+    database.history.kafka.bootstrap.servers: 'my-cluster-kafka-bootstrap.amq-streams.svc:9092'
+    database.history.kafka.topic: schema-changes.sales
+    database.hostname: db.odoo.svc.cluster.local 
+    database.port: 5432   
+    database.user: odoo 
+    database.password: odoo  
+    database.dbname: odoo 
+    database.server.name: sales_connector_postgresql 
+    database.include.list: public.sale_order 
+    plugin.name: pgoutput
+----

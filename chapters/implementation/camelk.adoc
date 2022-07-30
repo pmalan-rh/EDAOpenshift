@@ -1,0 +1,91 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Camel K 
+
+== Integration Platform
+
+The integration platform configuration controls the building and implementation of creating integrations.
+
+For our demo, we are going to utilize a maven repository configured with mirrors, and we have to reference the maven's settings.xml in the integration platform.
+
+We also going to change a couple of integration runtime traits. One setting, the logging color, cause a really bad output on an Openshift console, so we are going to change that, and the other setting is to enable tracing across all integrations and deployments, within the project.
+
+=== Create Maven settings.xml and configmap
+
+It is highly recommended that you setup a local maven repository for use by Camel K.
+
+Several third party tools are available for setting up a mirror repository server, even with OpenShift Operators available like Nexus and Artifactory.
+
+Here is a sample configuration to start with, containing all the required repositories for Camel K.
+
+.Sample settings.xml
+https://raw.githubusercontent.com/pmalan-rh/EDAOpenShift-code/main/camel-k/settings.xml
+
+From terminal, login into OpenShift and create the ConfigMap:
+
+[code]
+----
+oc login -u _user_
+cd ~/.m2
+oc create configmap maven-settings --from-file=settings.xml -n eda-order-entry
+----
+
+
+=== Create Integration Platform
+
+- Navigate to *Installed Operators* under *Operators*
+- Confirm that the selected project is *eda-order-entry*
+- Click on the *Red Hat Integration - Camel K*
+- Click on the *Integration Platform* panel, *Create instance*
+- Paste the following YAML:
+
+.Raw yaml 
+https://raw.githubusercontent.com/pmalan-rh/EDAOpenShift-code/main/camel-k/integrationplatform.yaml
+
+<<<
+
+[source,yaml]
+----
+apiVersion: camel.apache.org/v1
+kind: IntegrationPlatform
+metadata:
+  labels:
+    app: camel-k
+  name: camel-k
+  namespace: eda-order-entry
+spec:
+  build:
+    maven:
+      localRepository: /tmp/artifacts/m2
+      settings:
+        configMapKeyRef:
+          key: settings.xml
+          name: maven-settings
+    registry: {}
+  kamelet: {}
+  resources: {}
+  traits:
+    logging:
+      configuration:
+        color: false
+    tracing:
+      configuration:
+        property:
+          enabled: true
+----
+
+- Click on *Create*
+
+== Verification
+
+To verify the installation of Camel K, is to look at the list Kamelets:
+
+- Form *Administrator* perspective, go to *Installed Operators*, and select *Red Hat Integration - Camel K*
+- Select the *Kamelet* tab
+- You will see a list of kamelets, if install worked.
+
+.List of Kamelets
+image::camelk-kamelets.png[]
+

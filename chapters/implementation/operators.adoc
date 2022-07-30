@@ -97,6 +97,18 @@ To install the ((Red Hat distributed tracing platform)):
 - Leave all fields the defaults and click Install
 - After a few minutes, you will get a confirmation that Operator is ready for use. 
 
+== Red Hat Integration - AMQ Streams
+image::distributed-logo.png[]
+
+To install the ((Red Hat Integration - AMQ Streams)):
+
+- From the *Administrator* perspective, got to the OperatorHub from the Operators section of the navigation pane.
+- In the *All Items* filter, type in *AMQ*
+- Click the Red Hat Integration - AMQ Streams tile, to open the Operator details
+- At the top of Red Hat Integration - AMQ Streams panel, click Install
+- Leave all fields the defaults and click Install
+- After a few minutes, you will get a confirmation that Operator is ready for use. 
+
 <<<
 
 == Summary

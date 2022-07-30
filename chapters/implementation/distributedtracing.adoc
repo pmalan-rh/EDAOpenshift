@@ -1,0 +1,22 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Distributed Tracing Platform
+
+To see what is happening within our components, we can utilize the distributed tracing platform.
+
+- From the *Administrator* perspective, got to the Projects from the Home section of the navigation pane.
+- Click on *eda-order-entry*, under the project list
+- Go to *Installed Operators*, under the *Operators* section
+- Click on the *Red Hat OpenShift distributed tracing platform* Operator
+- On the *Jaeger* panel, click *Create Instance*
+- Leave the defaults, but confirm the *Strategy* is set to *allInOne*
+- Click on *Create*
+- Click on *Routes*, under the section *Networking*
+- Click on the link displayed under *Location* to access Jaeger
+- Login to gain access to Jaeger
+
+.Jaeger UI
+image::jaeger-ui.png[]
+

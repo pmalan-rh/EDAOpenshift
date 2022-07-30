@@ -21,9 +21,13 @@ Pieter Malan
 :part-signifier: Part
 :book: true
 :pdf: true
+:source-highlighter: rouge
 
 :chapters-path: chapters/
 :imagesdir: images/
+
+
+image:pexels-ron-lach-9785609.jpg[page=1]
 
 toc::[]
 
@@ -125,23 +129,41 @@ include::{chapters-path}third-party/vscode.adoc[leveloffset=+1]
 
 = Sample EDA Platform and Demo implementation
 
-include::{chapters-path}implementation/operators.adoc[leveloffset=+1]
+== Supporting Services
+
+include::{chapters-path}implementation/operators.adoc[leveloffset=+2]
 
 <<<
 
-include::{chapters-path}implementation/demoerp.adoc[leveloffset=+1]
+include::{chapters-path}implementation/serverless.adoc[leveloffset=+2]
 
 <<<
 
-include::{chapters-path}implementation/serverless.adoc[leveloffset=+1]
+include::{chapters-path}implementation/amqstreams.adoc[leveloffset=+2]
 
 <<<
 
-include::{chapters-path}implementation/serverless.adoc[leveloffset=+1]
+include::{chapters-path}implementation/camelk.adoc[leveloffset=+2]
 
 <<<
 
-== x
+include::{chapters-path}implementation/serviceregistry.adoc[leveloffset=+2]
+
+<<<
+
+include::{chapters-path}implementation/distributedtracing.adoc[leveloffset=+2]
+
+<<<
+
+== Demo Implementation
+
+include::{chapters-path}implementation/demoerp.adoc[leveloffset=+2]
+
+<<<
+
+include::{chapters-path}implementation/debezium.adoc[leveloffset=+2]
+
+<<<
 
 = Index
 
@@ -149,4 +171,5 @@ include::{chapters-path}implementation/serverless.adoc[leveloffset=+1]
 == Index
 
 
+ 
  
