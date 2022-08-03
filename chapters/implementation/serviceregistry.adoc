@@ -22,12 +22,12 @@ Since we have our kafka instance, we are going to use that.
 .Bootstrap Server Endpoint for my-cluster-kafka-bootstrap
 my-cluster-kafka-bootstrap.amq-streams.svc:9092
 
-[note]
-****
+[NOTE]
+====
 The service hostname is determined by service and project (namespace), appended with svc.cluster.local.
 
 The 'cluser.local' is added automatically,as it is the default local domain name, so typically it is dropped from service endpoints, if used internal to OpenShift. 
-****
+====
 
 Next up, we have to create a namespace for Service Registry.
 

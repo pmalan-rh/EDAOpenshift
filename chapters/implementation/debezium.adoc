@@ -11,7 +11,7 @@ First we have to prepare the database to publish, or capture logs, depending on 
 
 Secondly, we have to configure the Kafka Connector to enable the events to be published.
 
-== Postgress Configuration
+== Postgres Configuration
 
 We have to configure the database engine configuration, and also apply some changes on a schema level, through sql interaction.
 
@@ -129,6 +129,12 @@ spec:
     config.storage.replication.factor: -1
     offset.storage.replication.factor: -1
     status.storage.replication.factor: -1
+    key.converter: io.apicurio.registry.utils.converter.AvroConverter
+    key.converter.schema.registry.url: http://service-registry-service.service-registry.svc.cluster.local:8080/api
+    key.converter.apicurio.registry.as-confluent: true
+    key.converter.apicurio.registry.auto-register: true
+    value.converter: io.apicurio.registry.utils.converter.AvroConverter
+    key.converter.schema.registry.url: http://service-registry-service.service-registry.svc.cluster.local:8080/api
   tls:
     trustedCertificates:
       - secretName: my-cluster-cluster-ca-cert
@@ -144,11 +150,26 @@ spec:
           - type: zip
             url: https://maven.repository.redhat.com/ga/io/debezium/debezium-connector-postgres/1.9.5.Final-redhat-00001/debezium-connector-postgres-1.9.5.Final-redhat-00001-plugin.zip
           - type: zip
-            url: https://maven.repository.redhat.com/ga/io/apicurio/apicurio-registry-distro-connect-converter/2.2.2.managedsvc-redhat-00001/apicurio-registry-distro-connect-converter-2.2.2.managedsvc-redhat-00001.zip
+            url: https://maven.repository.redhat.com/ga/io/apicurio/apicurio-registry-distro-connect-converter/1.2.2.Final-redhat-00005/apicurio-registry-distro-connect-converter-1.2.2.Final-redhat-00005-converter.zip
+          - type: jar
+            url: https://maven.repository.redhat.com/ga/io/apicurio/apicurio-registry-serdes-jsonschema-serde/2.0.0.Final-redhat-00005/apicurio-registry-serdes-jsonschema-serde-2.0.0.Final-redhat-00005.jar
         
   replicas: 1
   bootstrapServers: 'my-cluster-kafka-bootstrap:9093'
 ----
+
+[TIP]
+.Latest Releases for Debezium
+====
+The get the latest Debezium plugins, you can browse to the following URL, and search for specific plugins.
+
+https://maven.repository.redhat.com/ga/io/debezium/
+
+For the APICurio Registry converter:
+
+https://maven.repository.redhat.com/ga/io/apicurio/apicurio-registry-distro-connect-converter/
+
+====
 
 === Verify Build
 
