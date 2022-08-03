@@ -207,3 +207,68 @@ spec:
     database.include.list: public.sale_order 
     plugin.name: pgoutput
 ----
+
+== Testing Debezium
+
+== Peek into Kafka
+
+UI for Apache Kafka is a third=party tool to see events in Kafka.
+
+Steps for eploying of UI for Apache Kafka:
+
+- From *Administrator* perspective, click *Projects* under *Home* section
+- Click *amq_streams* on the list of projects
+- Change the perspective to *Developer*
+- Right click on *Topology Map*, *Add to Project*, and click on *Container Image*
+- Specify *provectuslabs/kafka-ui:latest* for *Image name from external registry*
+- Leave the rest defaults, and click on *Deployment* at the bottom in the *Click on the names to access ..* sentence
+- Under *Environment Variables, add the following values:
+
+Name: *KAFKA_CLUSTERS_0_NAME* value *amq-streams*
+
+Name: *KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS* value *my-cluster-kafka-bootstrap.amq-streams.svc:9092*
+
+- Click on *Create*
+
+Next we have to get the URL to application:
+
+- Click on *Project*
+- Click on *Route* on the *Inventory* panel
+- Click on the *Location*, next to *kafka-ui*
+
+UI for Apache Kafka, will display a list of options, select *Topics*, and *odoo.public.sale_order*
+
+- select the *Messages* tab
+- On the far right hand side, change the dropdown *Oldest First* to *Live Mode*
+
+In the next section, we are going to create a Kafka message, by update a sales order.
+
+=== Odoo Update
+
+Login into Odoo, refer to Odoo configuration to get login link.
+
+After login go to *Sales*
+
+image::odoo-sales-menu.png[]
+
+To update a quote:
+
+- Click on the first *quote* in the table
+- Click on *Edit*
+- Update the *Payment Terms*, to a new value
+- Click on *Save*
+
+Switching back to UI for Apache Kafka, you will a message similar to the following, after clicking on the + sign next to new message:
+
+image::ui-kafka.png[]
+
+UI for Apache Kafka does not decode the message correctly, since it does not understand the associated AVRO schema, but at least we can confirm that Debezium is doing it's job as expected.
+
+Last check is to see if the schema was registered in the service registry.
+
+Go to the Service Registry home page:
+
+- You would be able to see the auto registered AVRO schemas for our defined Debezium events, as illustrated in the follwong image.
+
+.Registered Schemas in Service Registry
+image::service-registry-schemas.png[]
