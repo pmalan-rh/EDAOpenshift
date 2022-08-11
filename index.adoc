@@ -157,11 +157,15 @@ include::{chapters-path}implementation/distributedtracing.adoc[leveloffset=+2]
 
 == Demo Implementation
 
-include::{chapters-path}implementation/demoerp.adoc[leveloffset=+2]
+include::{chapters-path}demo/demoerp.adoc[leveloffset=+2]
 
 <<<
 
-include::{chapters-path}implementation/debezium.adoc[leveloffset=+2]
+include::{chapters-path}demo/debezium.adoc[leveloffset=+2]
+
+<<<
+
+include::{chapters-path}demo/camelk-demo.adoc[leveloffset=+2]
 
 <<<
 

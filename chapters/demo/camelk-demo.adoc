@@ -1,0 +1,38 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Demo Camel K 
+
+For this demo, we are going to capture the Debezium CDC event, sales order changed, and publish it to the Knative broker as a CloudEvent. 
+
+
+== Camel K Kafka Subscriber
+
+To build our Camel K Kafka subscriber:
+
+- In Visual Studio Code, press *Ctrl+Shift+A*, or open *View* -> *Command Palette* menu item
+- Search and select *Create a new Apache Camel K Integration file*
+- Select *Java*
+- Select the default Workspace
+- Name it *SaleOrderCDCKafka*
+
+We are going to include a property file (which will result in a ((configmap)) deployment) in our integration.
+
+- Add the following line after the *// camel-k: language=java* line.
+
+[code]
+// camel-k: property=file:kafka.properties
+
+- Create a new file, call it *kafka.properties*
+- Add the following content:
+
+[code]
+----
+camel.component.kafka.brokers=localhost:9092
+camel.component.kafka.groupId=mygroup
+camel.component.kafka.valueDeserializer=io.apicurio.registry.utils.serde.AvroKafkaDeserializer
+registryurl=http://localhost:8080/api
+datumprovider=io.apicurio.registry.utils.serde.avro.ReflectAvroDatumProvider
+globalid=io.apicurio.registry.utils.serde.strategy.GetOrCreateIdStrategy
+----

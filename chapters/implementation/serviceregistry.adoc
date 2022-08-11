@@ -46,7 +46,7 @@ Next up, we have to create a namespace for Service Registry.
 .Service Registry YAML
 image::service-registry-config.png[]
 
-== Testing to Registry
+== Testing the Registry
 
 By default, there would be a route created to expose the registry to the outside world.
 

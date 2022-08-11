@@ -89,3 +89,91 @@ To verify the installation of Camel K, is to look at the list Kamelets:
 .List of Kamelets
 image::camelk-kamelets.png[]
 
+<<<
+
+== Development Environment - Visual Studio
+
+=== Perquisites
+
+Visual Studio use the OpenShift client's context to interact with remote OpenShift deployment.
+
+To install required command line (cli) tools, click on the ? icon next to your user name on the OpenShift Console.
+
+image::openshift-console-cli.png[]
+
+There are multiple Visual Studio Code extensions available for Camel K, we are going to use the one available from Red Hat, at https://marketplace.visualstudio.com/items?itemName=redhat.vscode-camelk
+
+=== Hello World Camel K Style
+
+Open Visual Studio Code in a newly created folder.
+
+[TIP]
+To start Visual Studio Code, in a folder, you start from the cmd line using *code .*.
+
+Building our Hello World Camel K:
+
+- In Visual Studio Code, press *Ctrl+Shift+A*, or open *View* -> *Command Palette* menu item
+- Search and select *Create a new Apache Camel K Integration file*
+- Select *Java*
+- Select Workspace
+- Name it *HelloWorld*
+
+The generated code will show a sample Java Camel K route.
+
+Before we deploy the code to our eda-order-entry project, we have to select the OpenShift context, and the project:
+
+- Select at the bottom of editor, the OpenShift context, and the namespace,*eda-order-entry*
+
+image::vsc-code-openshift-context.png[]
+
+If the context is not populated, then you have to login into OpenShift, either from a different terminal, or by pressing *CTRL+SHIFT+*, then do a *oc login ...*.
+
+For deployment, press *Ctrl+Shift+A*, Select *Start Apache Camel K Integration*
+
+image::vsc-code-start-camelk.png[]
+
+After initial deployment, you can check the status, and output of the log files within Visual Studio Code.
+
+image::vsc-code-log-active.png[]
+
+If you expand the *APACHE CAMEL K INTEGRATIONS*, you will a list of deployed integrations, in our case *hello-world* with a green dot indicating it is running. If the dot is red, an error occurred.
+
+In the OUTPUT windows, you will see the log output of our deployed integration.
+
+=== Looking under the covers
+
+Open the OpenShift Console to see what happened to within our project.
+
+- From the *Administrator* perspective, go to *Projects*, under *Home*
+- On the project list, select the *eda-order-entry*
+- Switch perspective to *Developer*
+
+Notice the new *hello-world* with the Red Camel icon deployment.
+
+image::camel-k-deployment.png[]
+
+- Click on *hello-world*
+- On the Information panel, click on the *Resources* tab
+- You will see the *hello-world-..* pod; FYI by clicking on *View Logs*. This log output of the pod, is what you see in the Visual Studio Code OUTPUT
+
+image::camel-k-integration-link.png[]
+
+- Click on the *Managed by hello-world* link
+- Select the *YAML* tab, and hopefully you will see something familiar. Our source code !
+
+
+[HINT]
+****
+.Integration Custom Resource
+
+When you do a deployment from Visual Studio Code, we have created an Integration Custom Resource. The creation of the resource, triggered a full build of an Camel K S2I build, which resulted in an image deployed to our environment.
+
+Camel K has the smarts to utilize different technologies, or traits, depending on the functionality of the code. A good example might be if we deployed a REST service, our resulting deployment might result in a KNative serverless deployment.
+
+These traits can be configured within the code, or as we did for the logging on an Integration Platform level.
+
+For promoting our integration from Dev to Test, we can use the Integration Resource to recreate the deployment, with the advantage, that we might have configured different settings for our Integration Platform. Off course there might be additional resources involved, like properties, secrets which you have to deploy beforehand if in use by your code.
+****
+
+
+

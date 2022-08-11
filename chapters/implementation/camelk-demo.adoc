@@ -1,0 +1,15 @@
+:doctype: book
+:icons: font
+:hide-uri-scheme:
+
+= Demo Camel K 
+
+== Development Environment - Visual Studio
+
+=== Perquisites
+
+Visual Studio use the OpenShift client's context to interact with remote OpenShift deployment.
+
+To install required command line (cli), click on the ? icon next to your user name on the OpenShift Console. Click on the *Command line tools* and download the relevant tool, *oc* for your specific operating system.
+
+image::openshift-console-cli.png[]

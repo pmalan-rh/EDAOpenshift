@@ -5,11 +5,17 @@
 = Demo Debezium - Change Data Capture
 :source-highlighter: rouge
 
+For our demo, we are going to listen for changes on a sales order. The specific change we are interested in, is when an order is approved.
+
+Since Odoo does not emit any events, we have to capture the change on the database level.
+
+We are going to setup Debezium to capture the changes on the table sale_order.
+
 Debezium configuration require two distinct areas. 
 
-First we have to prepare the database to publish, or capture logs, depending on the RDBMS in question.
+First we have to prepare the database to publish, or capture logs, depending on the RDBMS in question. For our instance, we are going to use the PogresSQL under Odoo.
 
-Secondly, we have to configure the Kafka Connector to enable the events to be published.
+Secondly, we have to configure the Kafka Connector to enable the events to be published to a topic in Kafka.
 
 == Postgres Configuration
 
@@ -58,7 +64,7 @@ include '/var/lib/pgsql/openshift-custom-postgresql.conf'
 After the pod has restarted, we have to enable the odoo database with replication.
 
 - Again, following steps above, to get the terminal of the *db-..* pod.
-- In the terminal, eexecute the following:
+- In the terminal, execute the following:
 
 [code,sql]
 ----
@@ -77,13 +83,13 @@ postgres=#/q
 
 == Configuring Kafka Connect
 
-Kafka Connect is the service to which a Kafka Connector is deployed to. The coonector is build by OpenShift with all the relevant libraries required, as specified in the KafkaConnect resource.
+Kafka Connect is the service to which a Kafka Connector is deployed to. The connector is build by OpenShift's S2I with all the relevant libraries required, as specified in the KafkaConnect resource.
 
 In order to use Debezium, we have to include the relevant libraries into the Kafka Connect. We are also going to deploy the service registry libraries.
 
 To create a Kafka Connect configuration:
 
-We have to create a target ImageStream for the output of the build of our connector.
+We have to create a target ImageStream for the output of the build of our connector, before we start the build.
 
 - Click on the *+* at the top next to your username.
 - Paste the following YAML, to create ImageStream
@@ -131,10 +137,12 @@ spec:
     status.storage.replication.factor: -1
     key.converter: io.apicurio.registry.utils.converter.AvroConverter
     key.converter.schema.registry.url: http://service-registry-service.service-registry.svc.cluster.local:8080/api
+    key.converter.apicurio.registry.global-id: io.apicurio.registry.utils.serde.strategy.AutoRegisterIdStrategy
     key.converter.apicurio.registry.as-confluent: true
     key.converter.apicurio.registry.auto-register: true
     value.converter: io.apicurio.registry.utils.converter.AvroConverter
     key.converter.schema.registry.url: http://service-registry-service.service-registry.svc.cluster.local:8080/api
+    value.converter.apicurio.registry.global-id: io.apicurio.registry.utils.serde.strategy.AutoRegisterIdStrategy
   tls:
     trustedCertificates:
       - secretName: my-cluster-cluster-ca-cert

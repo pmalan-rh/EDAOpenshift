@@ -14,7 +14,7 @@ On the serving side, it gives us access to automatic scaling and rapid deploymen
 
 Scaling includes traffic-splitting across different versions, flexible routing and scale to zero, which saves resources if deployment is not in use. 
 
-Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and ((cloud events)), or CloudEvents, refering to the product.
+Eventing opens a host of features directly related to EDA processing, channels (publish/subscribe), broker (filter based subscription) and ((cloud events)), or CloudEvents, referring to the product.
 
 ((CloudEvents)) forms an important part of EDA, and acts as the internal payload definition, with typically HTTP as the communication protocol.
 

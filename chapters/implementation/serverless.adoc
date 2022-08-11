@@ -131,7 +131,7 @@ Data,
 {"name":"Hello World!"}
 ----
 
-== Exprimentation
+== Experimentation
 
 Since our events fires too close to each other, the Knative service never scales down to zero. 
 
